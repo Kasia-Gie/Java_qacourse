@@ -2,22 +2,14 @@ package ru.stqa.pft.sandbox;
 
 public class MyFirstProgram {
 
-	public static void main(String[] args){
-		System.out.println("Hello, world!");
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+    Square s = new Square(5);
+    System.out.println("Pole kwadratu o boku " + s.l + " = " + s.area());
 
-		double l = 5;
-		System.out.println("Pole kwadratu o boku " + l + " = " + area(l));
+    Rectangle r = new Rectangle(4, 6);
 
-		double a = 4;
-		double b = 6;
-		System.out.println("Pole prostokąta o bokach " + a + " i "  + b + " = " + area(a, b));
-	}
-
-	public static double area (double len){
-		return len * len;
-	}
-	public static double area(double a, double b){
-		return a *b;
-	}
+    System.out.println("Pole prostokąta o bokach " + r.a + " i " + r.b + " = " + r.area());
+  }
 
 }
