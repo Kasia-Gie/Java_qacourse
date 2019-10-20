@@ -1,16 +1,18 @@
 package ru.stqa.pft.addressbook.model;
 
-public class NewContact {
+public class ContactData {
     private final String firstName;
     private final String lastName;
     private final String mobile;
     private final String email;
+    private static String group;
 
-    public NewContact(String firstName, String lastName, String mobile, String email) {
+    public ContactData(String firstName, String lastName, String mobile, String email, String group) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobile = mobile;
         this.email = email;
+        this.group = group;
     }
 
     public String getFirstName() {
@@ -27,5 +29,9 @@ public class NewContact {
 
     public String getEmail() {
         return email;
+    }
+
+    public static String getGroup() {
+        return group;
     }
 }

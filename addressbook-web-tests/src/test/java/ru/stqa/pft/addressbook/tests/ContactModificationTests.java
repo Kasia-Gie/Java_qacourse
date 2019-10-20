@@ -1,14 +1,14 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.NewContact;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         app.getContactHelper().selectContact();
         app.getContactHelper().editContact();
-        app.getNavigationHelper().fillNewContactData(new NewContact("test1", "test2", "123456789", "test@test.com"));
+        app.getContactHelper().fillContactForm(new ContactData("test1", "test2", "123456789", "test@test.com", null), false);
         app.getContactHelper().submitContactModification();
     }
 }
