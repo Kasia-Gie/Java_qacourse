@@ -30,6 +30,10 @@ public class ContactHelper extends HelperBase {
         click(By.name("selected[]"));
     }
 
+    public void goToAddNewContact() {
+        click(By.linkText("add new"));
+    }
+
     public void editContact() {
 
         click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[8]/a/img"));
@@ -41,6 +45,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitNewContact() {
+
         wd.findElement(By.name("submit")).click();
     }
 
@@ -50,6 +55,17 @@ public class ContactHelper extends HelperBase {
     }
 
     public void acceptContactDeletion() {
+
         wd.switchTo().alert().accept();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void createContact(ContactData contact, boolean creation) {
+        goToAddNewContact();
+        fillContactForm(contact, creation);
+        submitNewContact();
     }
 }
