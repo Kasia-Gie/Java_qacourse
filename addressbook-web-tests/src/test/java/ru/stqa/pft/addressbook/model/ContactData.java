@@ -16,14 +16,17 @@ public class ContactData {
     }
 
     public String getFirstName() {
+
         return firstName;
     }
 
     public String getLastName() {
+
         return lastName;
     }
 
     public String getMobile() {
+
         return mobile;
     }
 
@@ -32,6 +35,7 @@ public class ContactData {
     }
 
     public static String getGroup() {
+
         return group;
     }
 }

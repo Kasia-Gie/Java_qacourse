@@ -13,18 +13,10 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData newContact, boolean creation) {
-        wd.findElement(By.name("firstname")).click();
-        wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys(newContact.getFirstName());
-        wd.findElement(By.name("lastname")).click();
-        wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys(newContact.getLastName());
-        wd.findElement(By.name("mobile")).click();
-        wd.findElement(By.name("mobile")).clear();
-        wd.findElement(By.name("mobile")).sendKeys(newContact.getMobile());
-        wd.findElement(By.name("email")).click();
-        wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys(newContact.getEmail());
+        type(By.name("firstname"), newContact.getFirstName());
+        type(By.name("lastname"), newContact.getLastName());
+        type(By.name("mobile"), newContact.getMobile());
+        type(By.name("email"), newContact.getEmail());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
