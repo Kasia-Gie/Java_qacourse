@@ -7,11 +7,11 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() throws InterruptedException {
-        int before = app.getContactHelper().getContactCount();
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("test1", "test2", "123456789", "test@test.com", "test1"), true);
             app.getNavigationHelper().promptGoToHomePage();
         }
+        int before = app.getContactHelper().getContactCount();
         app.getContactHelper().selectContact(0);
         app.getContactHelper().editContact();
         app.getContactHelper().fillContactForm(new ContactData("test1", "test2", "123456789", "test@test.com", null), false);
