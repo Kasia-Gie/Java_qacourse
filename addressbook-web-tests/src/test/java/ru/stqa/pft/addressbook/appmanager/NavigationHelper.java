@@ -23,14 +23,11 @@ public class NavigationHelper extends HelperBase {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
-        click(By.linkText("add new"));
+        click(By.linkText("home"));
 
     }
 
-    public void promptGoToHomePage()
-
-    {
-
+    public void promptGoToHomePage() {
         click(By.linkText("home page"));
     }
 }
