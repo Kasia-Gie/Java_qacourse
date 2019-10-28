@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,14 +77,20 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-//    public List<ContactData> getContactList() {
-//        List<ContactData> contacts = new ArrayList<ContactData>();
-//        List<WebElement> elements = wd.findElements(By.cssSelector("td.class.center"));
-//        for (WebElement element : elements) {
-//            String name = element.getText();
-//            ContactData contact = new ContactData(firstName, lastName,  null, null, null);
-//            contacts.add(contact);
-//        }
-//        return contacts;
-//    }
+    public List<ContactData> getContactList() {
+        WebElement mainTable = wd.findElement(By.id("maintable"));
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> rows = mainTable.findElements(By.tagName("tr"));
+
+        for (int i = 1; i < rows.size(); i++) {
+            List<WebElement> cells = rows.get(i).findElements(By.tagName("td"));
+            String firstName = cells.get(2).getText();
+            String lastName = cells.get(1).getText();
+            String id = rows.get(i).findElement(By.tagName("input")).getAttribute("value");
+            ContactData contact = new ContactData(id, firstName, lastName, null, null, null);
+            contacts.add(contact);
+        }
+
+        return contacts;
+    }
 }
