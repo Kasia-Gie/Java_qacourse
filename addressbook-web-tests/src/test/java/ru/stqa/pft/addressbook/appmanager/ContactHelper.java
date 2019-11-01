@@ -37,9 +37,8 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void editContact() {
-
-        click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[8]/a/img"));
+    public void editContact(int index) {
+        wd.findElements(By.cssSelector("img[alt='Edit']")).get(index).click();
     }
 
     public void submitContactModification() {
@@ -89,7 +88,6 @@ public class ContactHelper extends HelperBase {
             ContactData contact = new ContactData(id, firstName, lastName, null, null, null);
             contacts.add(contact);
         }
-
         return contacts;
     }
 }
