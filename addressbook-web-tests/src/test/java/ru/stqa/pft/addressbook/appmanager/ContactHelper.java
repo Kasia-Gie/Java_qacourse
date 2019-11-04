@@ -7,8 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -29,16 +30,16 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    private void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void goToAddNewContact() {
         click(By.linkText("add new"));
     }
 
-    public void editContact(int index) {
-        wd.findElements(By.cssSelector("img[alt='Edit']")).get(index).click();
+    public void editContactById(int id) {
+        wd.findElement(By.xpath("//a[contains(@href, 'edit.php?id=" + id + "')]")).click();
     }
 
     public void submitContactModification() {
@@ -85,27 +86,23 @@ public class ContactHelper extends HelperBase {
         promptGoToHomePage();
     }
 
-    public void modify(List<ContactData> before, ContactData contact) {
-        editContact(before.size() - 1);
+    public void modify(ContactData contact) {
+        editContactById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
         promptGoToHomePage();
     }
 
-    public void delete(int index) {
-        selectContact(index);
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
         deleteSelectedContact();
         acceptContactDeletion();
         homePage();
     }
 
-    public int getContactCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
-
-    public List<ContactData> list() {
+    public Set<ContactData> all() {
         WebElement mainTable = wd.findElement(By.id("maintable"));
-        List<ContactData> contacts = new ArrayList<ContactData>();
+        Set<ContactData> contacts = new HashSet<ContactData>();
         List<WebElement> rows = mainTable.findElements(By.tagName("tr"));
 
         for (int i = 1; i < rows.size(); i++) {
