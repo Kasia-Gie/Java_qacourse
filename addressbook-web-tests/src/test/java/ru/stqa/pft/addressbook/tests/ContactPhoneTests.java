@@ -17,7 +17,8 @@ public class ContactPhoneTests extends TestBase {
     public void ensurePreconditions() {
         if (app.contact().all().size() == 0) {
             app.contact().create(new ContactData().withFirstName("test1").withLastName("test2")
-                    .withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("test@test.com").withGroup("test1"), true);
+                    .withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
+                    .withEmail("test@test.com").withEmail2("test2@test.com").withEmail3("test3@test.com").withGroup("test1").withAddress("test1"), true);
             app.contact().promptGoToHomePage();
         }
     }
