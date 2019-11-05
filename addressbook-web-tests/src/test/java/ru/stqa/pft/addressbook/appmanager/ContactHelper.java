@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -100,9 +99,9 @@ public class ContactHelper extends HelperBase {
         homePage();
     }
 
-    public Set<ContactData> all() {
+    public Contacts all() {
         WebElement mainTable = wd.findElement(By.id("maintable"));
-        Set<ContactData> contacts = new HashSet<ContactData>();
+        Contacts contacts = new Contacts();
         List<WebElement> rows = mainTable.findElements(By.tagName("tr"));
 
         for (int i = 1; i < rows.size(); i++) {
