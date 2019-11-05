@@ -79,6 +79,10 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[8]/a/img"));
     }
 
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
     public void create(ContactData contact, boolean creation) {
         goToAddNewContact();
         fillContactForm(contact, creation);
