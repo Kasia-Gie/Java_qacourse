@@ -133,7 +133,6 @@ public class ContactHelper extends HelperBase {
         return new Contacts(contactCache);
     }
 
-
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
         String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -149,6 +148,17 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName).
                 withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
+    }
+
+    public ContactData infoFromContent(ContactData contact) {
+        openContactContentById(contact.getId());
+        String allData = wd.findElement(By.id("content")).getText();
+        wd.navigate().back();
+        return new ContactData().withAllData(allData);
+    }
+
+    private void openContactContentById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href= 'view.php?id=%s']", id))).click();
     }
 
     private void initContactModificationById(int id) {
