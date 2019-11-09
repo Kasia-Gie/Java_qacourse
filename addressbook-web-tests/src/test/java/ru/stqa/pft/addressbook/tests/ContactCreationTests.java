@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -12,9 +14,11 @@ public class ContactCreationTests extends TestBase {
     @Test
     public void testContactCreation() throws Exception {
         Contacts before = app.contact().all();
+        File photo = new File("src/test/resources/photo.JPG");
         ContactData contact = new ContactData()
                 .withFirstName("test1").withLastName("test2").withEmail("test@test.com").withGroup("test1")
-                .withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("test@test.com").withGroup("test1");
+                .withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
+                .withEmail("test@test.com").withGroup("test1").withPhoto(photo);
         app.contact().create(contact, true);
         Contacts after = app.contact().all();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -22,11 +26,12 @@ public class ContactCreationTests extends TestBase {
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test
+    @Test(enabled = false)
     public void testBadContactCreation() throws Exception {
         Contacts before = app.contact().all();
+        File photo = new File("src/test/resources/photo.JPG");
         ContactData contact = new ContactData()
-                .withFirstName("test1'").withLastName("test2'").withMobilePhone("123456789").withEmail("test@test.com").withGroup("test1");
+                .withFirstName("test1'").withLastName("test2'").withMobilePhone("123456789").withEmail("test@test.com").withPhoto(photo);
         app.contact().create(contact, true);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
