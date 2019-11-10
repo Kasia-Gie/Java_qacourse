@@ -21,7 +21,7 @@ public class ContactModificationTests extends TestBase {
     }
 
     @Test
-    public void testContactModification() throws InterruptedException {
+    public void testContactModification() {
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData()

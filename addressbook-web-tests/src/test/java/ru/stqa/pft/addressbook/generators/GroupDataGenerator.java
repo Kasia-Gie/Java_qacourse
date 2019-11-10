@@ -54,18 +54,18 @@ public class GroupDataGenerator {
     private void saveAsJson(List<GroupData> groups, File file) throws IOException {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         String json = gson.toJson(groups);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private void saveAsXml(List<GroupData> groups, File file) throws IOException {
         XStream xstream = new XStream();
         xstream.processAnnotations(GroupData.class);
         String xml = xstream.toXML(groups);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
     private void saveAsCsv(List<GroupData> groups, File file) throws IOException {

@@ -7,8 +7,8 @@
     "email3": "test3@email.com",
     "mobilePhone": "+09876543210",
     "homePhone": "+12345678900",
-    "workPhone": "+00000000000",
-    "address": "Address0"
+    "workPhone": "123456780",
+    "address": "Address 0"
   },
   {
     "firstName": "FirsName 1",
@@ -18,8 +18,8 @@
     "email3": "test3@email.com",
     "mobilePhone": "+09876543211",
     "homePhone": "+12345678901",
-    "workPhone": "+00000000001",
-    "address": "Address1"
+    "workPhone": "123456781",
+    "address": "Address 1"
   },
   {
     "firstName": "FirsName 2",
@@ -29,7 +29,7 @@
     "email3": "test3@email.com",
     "mobilePhone": "+09876543212",
     "homePhone": "+12345678902",
-    "workPhone": "+00000000002",
-    "address": "Address2"
+    "workPhone": "123456782",
+    "address": "Address 2"
   }
 ]

@@ -23,13 +23,13 @@ public class ContactData {
     private String email3;
     @Expose
     private String mobilePhone;
-    @Expose
+    @XStreamOmitField
     private String allEmails;
     @Expose
     private String homePhone;
     @Expose
     private String workPhone;
-    @Expose
+    @XStreamOmitField
     private String allPhones;
     @Expose
     private String address;
