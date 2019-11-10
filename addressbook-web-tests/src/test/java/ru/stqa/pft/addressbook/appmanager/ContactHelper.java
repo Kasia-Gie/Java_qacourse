@@ -16,7 +16,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData newContact, boolean creation) {
+    public void fillContactForm(ContactData newContact) {
         type(By.name("firstname"), newContact.getFirstName());
         type(By.name("lastname"), newContact.getLastName());
         type(By.name("address"), newContact.getAddress());
@@ -28,11 +28,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), newContact.getEmail3());
 //        attach(By.name("photo"), newContact.getPhoto());
 
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+//        if (creation) {
+//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
+//        } else {
+//            Assert.assertFalse(isElementPresent(By.name("new_group")));
+//        }
     }
 
     private void selectContactById(int id) {
@@ -86,9 +86,9 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public void create(ContactData contact, boolean creation) {
+    public void create(ContactData contact) {
         goToAddNewContact();
-        fillContactForm(contact, creation);
+        fillContactForm(contact);
         submitNewContact();
         contactCache = null;
         promptGoToHomePage();
@@ -96,7 +96,7 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact) {
         editContactById(contact.getId());
-        fillContactForm(contact, false);
+        fillContactForm(contact);
         submitContactModification();
         contactCache = null;
         promptGoToHomePage();

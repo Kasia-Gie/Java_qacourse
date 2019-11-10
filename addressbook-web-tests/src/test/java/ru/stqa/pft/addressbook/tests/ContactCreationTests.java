@@ -56,7 +56,7 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreation(ContactData contact) {
         Contacts before = app.contact().all();
 //        File photo = new File("src/test/resources/photo.JPG");
-        app.contact().create(contact, true);
+        app.contact().create(contact);
         Contacts after = app.contact().all();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         assertThat(after, equalTo(
@@ -69,7 +69,7 @@ public class ContactCreationTests extends TestBase {
         File photo = new File("src/test/resources/photo.JPG");
         ContactData contact = new ContactData()
                 .withFirstName("test1'").withLastName("test2'").withMobilePhone("123456789").withEmail("test@test.com").withPhoto(photo);
-        app.contact().create(contact, true);
+        app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
         assertThat(after, equalTo(before));
