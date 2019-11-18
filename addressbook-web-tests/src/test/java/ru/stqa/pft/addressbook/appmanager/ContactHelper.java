@@ -1,10 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+//import org.hibernate.sql.Select;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -14,23 +19,25 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData newContact) {
-        type(By.name("firstname"), newContact.getFirstName());
-        type(By.name("lastname"), newContact.getLastName());
-        type(By.name("address"), newContact.getAddress());
-        type(By.name("home"), newContact.getHomePhone());
-        type(By.name("work"), newContact.getWorkPhone());
-        type(By.name("mobile"), newContact.getMobilePhone());
-        type(By.name("email"), newContact.getEmail());
-        type(By.name("email2"), newContact.getEmail2());
-        type(By.name("email3"), newContact.getEmail3());
-//        attach(By.name("photo"), newContact.getPhoto());
-//
-//        if (creation) {
-//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
-//        } else {
-//            Assert.assertFalse(isElementPresent(By.name("new_group")));
-//        }
+    public void fillContactForm(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("work"), contactData.getWorkPhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+
+        if (creation) {
+            if (contactData.getGroups().size() > 0)  {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     private void selectContactById(int id) {
@@ -86,7 +93,7 @@ public class ContactHelper extends HelperBase {
 
     public void create(ContactData contact) {
         goToAddNewContact();
-        fillContactForm(contact);
+        fillContactForm(contact, true);
         submitNewContact();
         contactCache = null;
         promptGoToHomePage();
@@ -94,7 +101,7 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact) {
         editContactById(contact.getId());
-        fillContactForm(contact);
+        fillContactForm(contact, false);
         submitContactModification();
         contactCache = null;
         promptGoToHomePage();
@@ -162,5 +169,29 @@ public class ContactHelper extends HelperBase {
 
     private void initContactModificationById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroupForAdding(group.getName());
+        click(By.name("add"));
+        click(By.xpath(".//*[@id='content']/div/i/a"));
+    }
+
+    public void removeFromGroup(ContactData contact, GroupData group) {
+        selectGroupForRemoval(group.getName());
+        selectContactById(contact.getId());
+        click(By.name("remove"));
+        click(By.xpath(".//*[@id='content']/div/i/a"));
+    }
+
+    private void selectGroupForAdding(String groupName) {
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupName);
+
+    }
+
+    private void selectGroupForRemoval(String groupName) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupName);
+
     }
 }
