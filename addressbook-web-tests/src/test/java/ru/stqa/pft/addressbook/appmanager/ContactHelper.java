@@ -192,6 +192,5 @@ public class ContactHelper extends HelperBase {
 
     private void selectGroupForRemoval(String groupName) {
         new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupName);
-
-    }
+            }
 }
