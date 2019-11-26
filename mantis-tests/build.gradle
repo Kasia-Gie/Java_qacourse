@@ -17,6 +17,8 @@ dependencies {
     implementation 'org.subethamail:subethasmtp:3.1.7'
     implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.4'
     implementation 'org.avaje.composite:logback:1.1'
+    implementation 'org.hibernate:hibernate-core:5.4.9.Final'
+    implementation 'mysql:mysql-connector-java:5.1.38'
 }
 
 test {
