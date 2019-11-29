@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
+    google()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.1'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.1'
+    implementation 'io.rest-assured:rest-assured:4.1.2'
+}
