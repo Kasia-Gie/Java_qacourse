@@ -11,12 +11,13 @@ import java.io.IOException;
 import java.util.Set;
 
 public class RestHelper {
-    private final String URL = "http://demo.bugify.com/api";
+
+    private final String URL = "https://bugify.stqa.ru/api";
     ApplicationManager app;
 
     public RestHelper(ApplicationManager app) {
         this.app = app;
-        RestAssured.authentication = RestAssured.basic("384810e2a2c89ef4be5e19823af9bb25", "");
+        RestAssured.authentication = RestAssured.basic("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 
     public int createIssue(Issue newIssue) throws IOException {
@@ -40,6 +41,7 @@ public class RestHelper {
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
         }.getType());
     }
+
 
     public Issue getIssue(int issueId) {
         String json = RestAssured.get(URL + String.format("/issues/%s.json", issueId)).asString();

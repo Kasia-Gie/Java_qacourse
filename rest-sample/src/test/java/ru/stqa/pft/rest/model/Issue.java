@@ -42,13 +42,22 @@ public class Issue {
         Issue issue = (Issue) o;
         return id == issue.id &&
                 Objects.equals(subject, issue.subject) &&
-                Objects.equals(description, issue.description) &&
-                Objects.equals(state_name, issue.state_name);
+                Objects.equals(description, issue.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, subject, description, state_name);
+        return Objects.hash(id, subject, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", description='" + description + '\'' +
+                ", state_name='" + state_name + '\'' +
+                '}';
     }
 
     public String getState_name() {

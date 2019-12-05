@@ -18,10 +18,10 @@ public class RestAssuredTests extends TestBase {
 
     @BeforeClass
     public void init() {
-        RestAssured.authentication = RestAssured.basic("384810e2a2c89ef4be5e19823af9bb25", "");
+        RestAssured.authentication = RestAssured.basic("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 
-    @Test
+    @Test (enabled = false)
     public void testCreateIssue() throws IOException {
         Set<Issue> oldIssues = getIssues();
         Issue newIssue = new Issue().withSubject("Test Issue").withDescription("Test Description");
@@ -32,7 +32,7 @@ public class RestAssuredTests extends TestBase {
     }
 
     private Set<Issue> getIssues() throws IOException {
-        String json = RestAssured.get("http://demo.bugify.com/api/issues.json").asString();
+        String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
@@ -43,7 +43,7 @@ public class RestAssuredTests extends TestBase {
         String json = RestAssured.given()
                 .param("subject", newIssue.getSubject())
                 .param("description", newIssue.getDescription())
-                .post("http://demo.bugify.com/api/issues.json").asString();
+                .post("https://bugify.stqa.ru/api/issues.json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
     }
